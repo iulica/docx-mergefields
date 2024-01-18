@@ -258,8 +258,14 @@ class MailmergeDocument():
         for field in self.fields:
             field.clean()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
 if __name__ == '__main__':
     DOCX_PATH = "../docx-mailmerge/tests/test_includepicture.docx"
-    mailmerge_doc = MailmergeDocument(DOCX_PATH)
-    mailmerge_doc.transform_fields()
-    mailmerge_doc.doc.save('../docx-mailmerge/tests/output/test_includepicture.docx')
+    with MailmergeDocument(DOCX_PATH) as mailmerge_doc:
+        mailmerge_doc.transform_fields()
+        mailmerge_doc.doc.save('../docx-mailmerge/tests/output/test_includepicture.docx')
