@@ -13,6 +13,8 @@ For the moment only the INCLUDEPICTURE fields are supported.
 It supports local images, URLs and base64 image encoded strings. Also, it allows 
 the resize of the image both in width and height.
 
+The fields are *replaced* so afterwards they cannot be updated anymore.
+
 This library makes use of the excellent `python-docx`_ library.
 
 Also, it is better used after mailmerging the INCLUDEPICTURE fields using the 
@@ -65,6 +67,7 @@ Todo / Wish List
 ================
 
 * Include other fields
+* Update the fields instead of replacing them
 
 Contributing
 ============
