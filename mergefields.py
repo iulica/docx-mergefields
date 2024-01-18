@@ -111,7 +111,7 @@ class IncludePictureField():
         return None
 
 
-class MailmergeDocument():
+class MergeFieldsDocument():
 
     def __init__(self, path):
         self.doc = docx.Document(path)
@@ -266,6 +266,6 @@ class MailmergeDocument():
 
 if __name__ == '__main__':
     DOCX_PATH = "../docx-mailmerge/tests/test_includepicture.docx"
-    with MailmergeDocument(DOCX_PATH) as mailmerge_doc:
+    with MergeFieldsDocument(DOCX_PATH) as mailmerge_doc:
         mailmerge_doc.transform_fields()
         mailmerge_doc.doc.save('../docx-mailmerge/tests/output/test_includepicture.docx')

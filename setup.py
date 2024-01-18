@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='docx-mergefields',
-      version='0.1.1',
+      version='0.1.2',
       description='Replaces fields in docx (Microsoft Office Word) files',
       long_description=open('README.rst').read(),
       classifiers=[
