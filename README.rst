@@ -15,7 +15,7 @@ the resize of the image both in width and height.
 
 The fields are *replaced* so afterwards they cannot be updated anymore.
 
-This library makes use of the excellent `python-docx`_ library.
+This library uses the excellent `python-docx`_ library.
 
 Also, it is better used after mailmerging the INCLUDEPICTURE fields using the 
 `docx-mailmerge2`_ library.
