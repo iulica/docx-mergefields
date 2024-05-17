@@ -1,9 +1,10 @@
-import shlex
-import warnings
 import pathlib
+import shlex
+import urllib.request
+import warnings
 from io import BytesIO
 from urllib.parse import urlparse
-import urllib.request
+
 import docx
 from docx.shared import Pt
 
@@ -19,7 +20,6 @@ NAMESPACES = {
 
 
 class IncludePictureField:
-
     def __init__(self, field_type, instr, tokens, field_dict):
         self.field_type = field_type
         self.instr = instr
@@ -124,7 +124,6 @@ class IncludePictureField:
 
 
 class MergeFieldsDocument:
-
     def __init__(self, path):
         self.doc = docx.Document(path)
         self.path = pathlib.Path(path)
@@ -154,14 +153,11 @@ class MergeFieldsDocument:
         )
 
     def _pull_next_merge_field(self, elements_of_type_begin, nested=False):
-
         assert elements_of_type_begin
         current_element = elements_of_type_begin.pop(0)
         parent_element = current_element.getparent()
         all_elements = []  # we need all the elments in case of updates
-        instr_elements = (
-            []
-        )  # the instruction part, elements that define how to get the value
+        instr_elements = []  # the instruction part, elements that define how to get the value
         show_elements = []  # the elements showing the current value
 
         current_element_list = instr_elements
