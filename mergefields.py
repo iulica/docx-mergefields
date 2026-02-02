@@ -58,15 +58,21 @@ class IncludePictureField:
         return default
 
     def _find_picture(self, doc_path):
-        path = self.tokens[1]
-        url_parts = urlparse(path)
-        if url_parts.scheme:  # in ['http', 'https', 'data']:
-            image_from_url = urllib.request.urlopen(path)
-            io_url = BytesIO(image_from_url.read())
-            return io_url
-        if doc_path is not None:
-            path = doc_path / path
-        return str(path)
+        path_str = self.tokens[1]
+        url_parts = urlparse(path_str)
+
+        # Check for real network schemes, ignoring single-letter drive symbols
+        if url_parts.scheme and len(url_parts.scheme) > 1:
+            image_from_url = urllib.request.urlopen(path_str)
+            return BytesIO(image_from_url.read())
+
+        # Convert to a Path object
+        local_path = pathlib.Path(path_str)
+
+        # If it's a relative path and we have a base directory, join them
+        if not local_path.is_absolute() and doc_path is not None:
+            local_path = pathlib.Path(doc_path) / local_path
+        return str(local_path)
 
     def insert_picture(self, doc, doc_path=None):
         first_run = self.field_dict["instr_elements"][0]

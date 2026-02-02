@@ -31,6 +31,25 @@ class IncludePictureFieldsTest(unittest.TestCase):
             # print(rels)
         # document = docx.Document("tests/output/test_includepicture_1.docx")
 
+    def test_winpath(self):
+        """
+        test a docx with a windows absolute path with drive
+        """
+        with MergeFieldsDocument(
+            path.join(path.dirname(__file__), "test_includepicture_winpath.docx")
+        ) as document:
+            # self.assertEqual(document.get_merge_fields(),
+            #                  set(['rowno', 'url']))
+            self.assertRaises(FileNotFoundError, document.transform_fields)
+            # document.doc.save('../docx-mailmerge/tests/output/test_includepicture.docx')
+            rels = {}
+            for r in document.doc.part.rels.values():
+                if isinstance(r._target, docx.ImagePart):
+                    rels[r.rId] = path.basename(r._target.partname)
+            self.assertEqual(len(rels), 0)
+            # print(rels)
+        # document = docx.Document("tests/output/test_includepicture_1.docx")
+
     def test_table_images(self):
         """
         test a docx with 3 images in a table
