@@ -1,0 +1,24 @@
+
+[project]
+# PEP 621 project metadata
+# See https://www.python.org/dev/peps/pep-0621/
+name = "docx-mergefields"
+version = "0.1.4"
+description = "Replaces fields in docx (Microsoft Office Word) files"
+readme = "README.rst"
+authors = [
+    {name = "Iulian Ciorăscu", email = "ciulian@gmail.com"},
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.7",
+    "Topic :: Text Processing",
+]
+dependencies = [
+    "python-docx",
+]
+license = {text = "MIT"}
+requires-python = ">=3.7"
+
+[project.urls]
+Homepage = "http://github.com/iulica/docx-mergefields"
